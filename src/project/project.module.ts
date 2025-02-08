@@ -17,9 +17,8 @@ import { UserService } from 'src/user/user.service';
         destination: './uploads',
         filename: (_, file, callback) => {
           const originalName = file.originalname.replace(/\s+/g, '_');
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          callback(null, `${uniqueSuffix}-${originalName}`);
+          const fileName = `${Date.now()}-${originalName}`;
+          callback(null, `${fileName}`);
         },
       }),
     }),

@@ -29,8 +29,13 @@ export class ProjectService {
     });
   }
 
-  findAll() {
-    return `This action returns all project`;
+  async findAll(userId: string, page: number, perPage: number) {
+    return await this.prisma.project.findMany({
+      where: { userId },
+      skip: (page - 1) * perPage,
+      take: perPage,
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   findOne(id: number) {

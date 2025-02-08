@@ -1,5 +1,5 @@
 export class CreateProjectDto {
   name: string;
-  imageUrl: string | null;
+  imageUrl?: string;
   userId: string;
 }

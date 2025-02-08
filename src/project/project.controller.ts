@@ -9,6 +9,7 @@ import {
   UseGuards,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { UpdateProjectDto } from './dto/update-project.dto';
@@ -21,24 +22,29 @@ import { UserId } from 'src/user/decorators/userId.decorator';
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
-  @UseInterceptors(FileInterceptor('image'))
   @Post()
-  create(
+  @UseInterceptors(FileInterceptor('image'))
+  public async create(
     @UserId() userId: string,
     @UploadedFile() file: Express.Multer.File | undefined,
     @Body() createProjectDto: { name: string },
   ) {
     const createData = {
       ...createProjectDto,
-      imageUrl: file ? file.filename : null,
+      imageUrl: file ? file.filename : undefined,
       userId,
     };
-    return this.projectService.create(createData);
+    console.log(file, file?.originalname);
+    return await this.projectService.create(createData);
   }
 
   @Get()
-  findAll() {
-    return this.projectService.findAll();
+  async findAll(
+    @UserId() userId: string,
+    @Query('page') page: number = 1,
+    @Query('perPage') perPage: number = 10,
+  ) {
+    return await this.projectService.findAll(userId, +page, +perPage);
   }
 
   @Get(':id')

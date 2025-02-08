@@ -20,8 +20,11 @@ import { join } from 'path';
       envFilePath: '.env',
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '../uploads'),
+      rootPath: join(__dirname, '..', 'uploads'), // Убрали лишний '../'
       serveRoot: '/uploads',
+      serveStaticOptions: {
+        fallthrough: false, // Не передавать запрос дальше если файл не найден
+      },
     }),
   ],
 })
