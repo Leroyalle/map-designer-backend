@@ -30,12 +30,14 @@ export class UserService {
     return await this.prisma.user.findFirst({ where: { email } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    console.log(updateUserDto);
-    return `This action updates a #${id} user`;
+  public async update(id: string, updateUserDto: UpdateUserDto) {
+    return await this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  public async remove(id: string) {
+    return await this.prisma.user.delete({ where: { id } });
   }
 }

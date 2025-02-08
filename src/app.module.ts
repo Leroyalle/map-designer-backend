@@ -7,6 +7,7 @@ import { EmailModule } from './email/email.module';
 import { ProjectModule } from './project/project.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
   imports: [
@@ -20,12 +21,13 @@ import { join } from 'path';
       envFilePath: '.env',
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'), // Убрали лишний '../'
+      rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
       serveStaticOptions: {
-        fallthrough: false, // Не передавать запрос дальше если файл не найден
+        fallthrough: false,
       },
     }),
   ],
+  providers: [JwtAuthGuard],
 })
 export class AppModule {}
