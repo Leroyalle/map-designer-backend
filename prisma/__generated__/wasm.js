@@ -139,7 +139,35 @@ exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
   imageUrl: 'imageUrl',
+  canvasWidth: 'canvasWidth',
+  canvasHeight: 'canvasHeight',
   userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectItemScalarFieldEnum = {
+  id: 'id',
+  canvasId: 'canvasId',
+  name: 'name',
+  desc: 'desc',
+  shortDesc: 'shortDesc',
+  time: 'time',
+  floor: 'floor',
+  link: 'link',
+  top: 'top',
+  left: 'left',
+  width: 'width',
+  height: 'height',
+  radius: 'radius',
+  fill: 'fill',
+  strokeWidth: 'strokeWidth',
+  locked: 'locked',
+  type: 'type',
+  angle: 'angle',
+  scaleX: 'scaleX',
+  scaleY: 'scaleY',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -158,12 +186,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.ProjectItemTypeEnum = exports.$Enums.ProjectItemTypeEnum = {
+  rect: 'rect',
+  circle: 'circle'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
   VerificationCode: 'VerificationCode',
-  Project: 'Project'
+  Project: 'Project',
+  ProjectItem: 'ProjectItem'
 };
 
 /**

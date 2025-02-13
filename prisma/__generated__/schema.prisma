@@ -48,9 +48,50 @@ model Project {
   name     String
   imageUrl String?
 
+  canvasWidth  Float
+  canvasHeight Float
+
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  items ProjectItem[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ProjectItem {
+  id String @id @default(uuid())
+
+  canvasId  String
+  name      String
+  desc      String?
+  shortDesc String?
+  time      String?
+  floor     Int?
+  link      String?
+
+  top         Float
+  left        Float
+  width       Float?
+  height      Float?
+  radius      Float?
+  fill        String
+  strokeWidth Float
+  locked      Boolean             @default(false)
+  type        ProjectItemTypeEnum
+  angle       Float
+  scaleX      Float
+  scaleY      Float
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProjectItemTypeEnum {
+  rect
+  circle
 }

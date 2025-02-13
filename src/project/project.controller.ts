@@ -16,6 +16,7 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserId } from 'src/user/decorators/userId.decorator';
+import { PublishProjectDto } from './dto/publish-project.dto';
 
 @UseGuards(JwtAuthGuard)
 @Controller('project')
@@ -47,9 +48,20 @@ export class ProjectController {
     return await this.projectService.findAll(userId, +page, +perPage);
   }
 
+  @Post(':projectId/publish')
+  publish(
+    @Param('projectId') projectId: string,
+    @Body() data: PublishProjectDto,
+    @UserId() userId: string,
+  ) {
+    console.log(projectId, data);
+    return this.projectService.publish(projectId, data, userId);
+  }
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectService.findOne(+id);
+  async findOne(@Param('id') id: string, @UserId() userId: string) {
+    console.log(id, userId);
+    return await this.projectService.findOne(id, userId);
   }
 
   @Patch(':id')

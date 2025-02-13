@@ -28,6 +28,28 @@ export type VerificationCode = $Result.DefaultSelection<Prisma.$VerificationCode
  * 
  */
 export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
+/**
+ * Model ProjectItem
+ * 
+ */
+export type ProjectItem = $Result.DefaultSelection<Prisma.$ProjectItemPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const ProjectItemTypeEnum: {
+  rect: 'rect',
+  circle: 'circle'
+};
+
+export type ProjectItemTypeEnum = (typeof ProjectItemTypeEnum)[keyof typeof ProjectItemTypeEnum]
+
+}
+
+export type ProjectItemTypeEnum = $Enums.ProjectItemTypeEnum
+
+export const ProjectItemTypeEnum: typeof $Enums.ProjectItemTypeEnum
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +205,16 @@ export class PrismaClient<
     * ```
     */
   get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.projectItem`: Exposes CRUD operations for the **ProjectItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProjectItems
+    * const projectItems = await prisma.projectItem.findMany()
+    * ```
+    */
+  get projectItem(): Prisma.ProjectItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +657,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     VerificationCode: 'VerificationCode',
-    Project: 'Project'
+    Project: 'Project',
+    ProjectItem: 'ProjectItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -641,7 +674,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "verificationCode" | "project"
+      modelProps: "user" | "verificationCode" | "project" | "projectItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -867,6 +900,80 @@ export namespace Prisma {
           }
         }
       }
+      ProjectItem: {
+        payload: Prisma.$ProjectItemPayload<ExtArgs>
+        fields: Prisma.ProjectItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProjectItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProjectItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ProjectItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProjectItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          findMany: {
+            args: Prisma.ProjectItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>[]
+          }
+          create: {
+            args: Prisma.ProjectItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          createMany: {
+            args: Prisma.ProjectItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProjectItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>[]
+          }
+          delete: {
+            args: Prisma.ProjectItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          update: {
+            args: Prisma.ProjectItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProjectItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProjectItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProjectItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProjectItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ProjectItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProjectItem>
+          }
+          groupBy: {
+            args: Prisma.ProjectItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProjectItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProjectItemCountArgs<ExtArgs>
+            result: $Utils.Optional<ProjectItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -954,6 +1061,7 @@ export namespace Prisma {
     user?: UserOmit
     verificationCode?: VerificationCodeOmit
     project?: ProjectOmit
+    projectItem?: ProjectItemOmit
   }
 
   /* Types for Logging */
@@ -1080,6 +1188,37 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountProjectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProjectWhereInput
+  }
+
+
+  /**
+   * Count Type ProjectCountOutputType
+   */
+
+  export type ProjectCountOutputType = {
+    items: number
+  }
+
+  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ProjectCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectCountOutputType
+     */
+    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectItemWhereInput
   }
 
 
@@ -3275,14 +3414,28 @@ export namespace Prisma {
 
   export type AggregateProject = {
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
+  }
+
+  export type ProjectAvgAggregateOutputType = {
+    canvasWidth: number | null
+    canvasHeight: number | null
+  }
+
+  export type ProjectSumAggregateOutputType = {
+    canvasWidth: number | null
+    canvasHeight: number | null
   }
 
   export type ProjectMinAggregateOutputType = {
     id: string | null
     name: string | null
     imageUrl: string | null
+    canvasWidth: number | null
+    canvasHeight: number | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3292,6 +3445,8 @@ export namespace Prisma {
     id: string | null
     name: string | null
     imageUrl: string | null
+    canvasWidth: number | null
+    canvasHeight: number | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3301,6 +3456,8 @@ export namespace Prisma {
     id: number
     name: number
     imageUrl: number
+    canvasWidth: number
+    canvasHeight: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -3308,10 +3465,22 @@ export namespace Prisma {
   }
 
 
+  export type ProjectAvgAggregateInputType = {
+    canvasWidth?: true
+    canvasHeight?: true
+  }
+
+  export type ProjectSumAggregateInputType = {
+    canvasWidth?: true
+    canvasHeight?: true
+  }
+
   export type ProjectMinAggregateInputType = {
     id?: true
     name?: true
     imageUrl?: true
+    canvasWidth?: true
+    canvasHeight?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3321,6 +3490,8 @@ export namespace Prisma {
     id?: true
     name?: true
     imageUrl?: true
+    canvasWidth?: true
+    canvasHeight?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3330,6 +3501,8 @@ export namespace Prisma {
     id?: true
     name?: true
     imageUrl?: true
+    canvasWidth?: true
+    canvasHeight?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3374,6 +3547,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ProjectMinAggregateInputType
@@ -3404,6 +3589,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ProjectCountAggregateInputType | true
+    _avg?: ProjectAvgAggregateInputType
+    _sum?: ProjectSumAggregateInputType
     _min?: ProjectMinAggregateInputType
     _max?: ProjectMaxAggregateInputType
   }
@@ -3412,10 +3599,14 @@ export namespace Prisma {
     id: string
     name: string
     imageUrl: string | null
+    canvasWidth: number
+    canvasHeight: number
     userId: string
     createdAt: Date
     updatedAt: Date
     _count: ProjectCountAggregateOutputType | null
+    _avg: ProjectAvgAggregateOutputType | null
+    _sum: ProjectSumAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
   }
@@ -3438,16 +3629,22 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     imageUrl?: boolean
+    canvasWidth?: boolean
+    canvasHeight?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    items?: boolean | Project$itemsArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     imageUrl?: boolean
+    canvasWidth?: boolean
+    canvasHeight?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3458,6 +3655,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     imageUrl?: boolean
+    canvasWidth?: boolean
+    canvasHeight?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3468,14 +3667,18 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     imageUrl?: boolean
+    canvasWidth?: boolean
+    canvasHeight?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "imageUrl" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "imageUrl" | "canvasWidth" | "canvasHeight" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    items?: boolean | Project$itemsArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -3488,11 +3691,14 @@ export namespace Prisma {
     name: "Project"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      items: Prisma.$ProjectItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       imageUrl: string | null
+      canvasWidth: number
+      canvasHeight: number
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -3891,6 +4097,7 @@ export namespace Prisma {
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    items<T extends Project$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Project$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3923,6 +4130,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Project", 'String'>
     readonly name: FieldRef<"Project", 'String'>
     readonly imageUrl: FieldRef<"Project", 'String'>
+    readonly canvasWidth: FieldRef<"Project", 'Float'>
+    readonly canvasHeight: FieldRef<"Project", 'Float'>
     readonly userId: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
@@ -4322,6 +4531,30 @@ export namespace Prisma {
   }
 
   /**
+   * Project.items
+   */
+  export type Project$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    where?: ProjectItemWhereInput
+    orderBy?: ProjectItemOrderByWithRelationInput | ProjectItemOrderByWithRelationInput[]
+    cursor?: ProjectItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectItemScalarFieldEnum | ProjectItemScalarFieldEnum[]
+  }
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4337,6 +4570,1368 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProjectInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProjectItem
+   */
+
+  export type AggregateProjectItem = {
+    _count: ProjectItemCountAggregateOutputType | null
+    _avg: ProjectItemAvgAggregateOutputType | null
+    _sum: ProjectItemSumAggregateOutputType | null
+    _min: ProjectItemMinAggregateOutputType | null
+    _max: ProjectItemMaxAggregateOutputType | null
+  }
+
+  export type ProjectItemAvgAggregateOutputType = {
+    floor: number | null
+    top: number | null
+    left: number | null
+    width: number | null
+    height: number | null
+    radius: number | null
+    strokeWidth: number | null
+    angle: number | null
+    scaleX: number | null
+    scaleY: number | null
+  }
+
+  export type ProjectItemSumAggregateOutputType = {
+    floor: number | null
+    top: number | null
+    left: number | null
+    width: number | null
+    height: number | null
+    radius: number | null
+    strokeWidth: number | null
+    angle: number | null
+    scaleX: number | null
+    scaleY: number | null
+  }
+
+  export type ProjectItemMinAggregateOutputType = {
+    id: string | null
+    canvasId: string | null
+    name: string | null
+    desc: string | null
+    shortDesc: string | null
+    time: string | null
+    floor: number | null
+    link: string | null
+    top: number | null
+    left: number | null
+    width: number | null
+    height: number | null
+    radius: number | null
+    fill: string | null
+    strokeWidth: number | null
+    locked: boolean | null
+    type: $Enums.ProjectItemTypeEnum | null
+    angle: number | null
+    scaleX: number | null
+    scaleY: number | null
+    projectId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProjectItemMaxAggregateOutputType = {
+    id: string | null
+    canvasId: string | null
+    name: string | null
+    desc: string | null
+    shortDesc: string | null
+    time: string | null
+    floor: number | null
+    link: string | null
+    top: number | null
+    left: number | null
+    width: number | null
+    height: number | null
+    radius: number | null
+    fill: string | null
+    strokeWidth: number | null
+    locked: boolean | null
+    type: $Enums.ProjectItemTypeEnum | null
+    angle: number | null
+    scaleX: number | null
+    scaleY: number | null
+    projectId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProjectItemCountAggregateOutputType = {
+    id: number
+    canvasId: number
+    name: number
+    desc: number
+    shortDesc: number
+    time: number
+    floor: number
+    link: number
+    top: number
+    left: number
+    width: number
+    height: number
+    radius: number
+    fill: number
+    strokeWidth: number
+    locked: number
+    type: number
+    angle: number
+    scaleX: number
+    scaleY: number
+    projectId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProjectItemAvgAggregateInputType = {
+    floor?: true
+    top?: true
+    left?: true
+    width?: true
+    height?: true
+    radius?: true
+    strokeWidth?: true
+    angle?: true
+    scaleX?: true
+    scaleY?: true
+  }
+
+  export type ProjectItemSumAggregateInputType = {
+    floor?: true
+    top?: true
+    left?: true
+    width?: true
+    height?: true
+    radius?: true
+    strokeWidth?: true
+    angle?: true
+    scaleX?: true
+    scaleY?: true
+  }
+
+  export type ProjectItemMinAggregateInputType = {
+    id?: true
+    canvasId?: true
+    name?: true
+    desc?: true
+    shortDesc?: true
+    time?: true
+    floor?: true
+    link?: true
+    top?: true
+    left?: true
+    width?: true
+    height?: true
+    radius?: true
+    fill?: true
+    strokeWidth?: true
+    locked?: true
+    type?: true
+    angle?: true
+    scaleX?: true
+    scaleY?: true
+    projectId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProjectItemMaxAggregateInputType = {
+    id?: true
+    canvasId?: true
+    name?: true
+    desc?: true
+    shortDesc?: true
+    time?: true
+    floor?: true
+    link?: true
+    top?: true
+    left?: true
+    width?: true
+    height?: true
+    radius?: true
+    fill?: true
+    strokeWidth?: true
+    locked?: true
+    type?: true
+    angle?: true
+    scaleX?: true
+    scaleY?: true
+    projectId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProjectItemCountAggregateInputType = {
+    id?: true
+    canvasId?: true
+    name?: true
+    desc?: true
+    shortDesc?: true
+    time?: true
+    floor?: true
+    link?: true
+    top?: true
+    left?: true
+    width?: true
+    height?: true
+    radius?: true
+    fill?: true
+    strokeWidth?: true
+    locked?: true
+    type?: true
+    angle?: true
+    scaleX?: true
+    scaleY?: true
+    projectId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProjectItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectItem to aggregate.
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectItems to fetch.
+     */
+    orderBy?: ProjectItemOrderByWithRelationInput | ProjectItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProjectItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProjectItems
+    **/
+    _count?: true | ProjectItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProjectItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProjectItemMaxAggregateInputType
+  }
+
+  export type GetProjectItemAggregateType<T extends ProjectItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateProjectItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProjectItem[P]>
+      : GetScalarType<T[P], AggregateProjectItem[P]>
+  }
+
+
+
+
+  export type ProjectItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectItemWhereInput
+    orderBy?: ProjectItemOrderByWithAggregationInput | ProjectItemOrderByWithAggregationInput[]
+    by: ProjectItemScalarFieldEnum[] | ProjectItemScalarFieldEnum
+    having?: ProjectItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProjectItemCountAggregateInputType | true
+    _avg?: ProjectItemAvgAggregateInputType
+    _sum?: ProjectItemSumAggregateInputType
+    _min?: ProjectItemMinAggregateInputType
+    _max?: ProjectItemMaxAggregateInputType
+  }
+
+  export type ProjectItemGroupByOutputType = {
+    id: string
+    canvasId: string
+    name: string
+    desc: string | null
+    shortDesc: string | null
+    time: string | null
+    floor: number | null
+    link: string | null
+    top: number
+    left: number
+    width: number | null
+    height: number | null
+    radius: number | null
+    fill: string
+    strokeWidth: number
+    locked: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    projectId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ProjectItemCountAggregateOutputType | null
+    _avg: ProjectItemAvgAggregateOutputType | null
+    _sum: ProjectItemSumAggregateOutputType | null
+    _min: ProjectItemMinAggregateOutputType | null
+    _max: ProjectItemMaxAggregateOutputType | null
+  }
+
+  type GetProjectItemGroupByPayload<T extends ProjectItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProjectItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProjectItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProjectItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ProjectItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProjectItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    canvasId?: boolean
+    name?: boolean
+    desc?: boolean
+    shortDesc?: boolean
+    time?: boolean
+    floor?: boolean
+    link?: boolean
+    top?: boolean
+    left?: boolean
+    width?: boolean
+    height?: boolean
+    radius?: boolean
+    fill?: boolean
+    strokeWidth?: boolean
+    locked?: boolean
+    type?: boolean
+    angle?: boolean
+    scaleX?: boolean
+    scaleY?: boolean
+    projectId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectItem"]>
+
+  export type ProjectItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    canvasId?: boolean
+    name?: boolean
+    desc?: boolean
+    shortDesc?: boolean
+    time?: boolean
+    floor?: boolean
+    link?: boolean
+    top?: boolean
+    left?: boolean
+    width?: boolean
+    height?: boolean
+    radius?: boolean
+    fill?: boolean
+    strokeWidth?: boolean
+    locked?: boolean
+    type?: boolean
+    angle?: boolean
+    scaleX?: boolean
+    scaleY?: boolean
+    projectId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectItem"]>
+
+  export type ProjectItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    canvasId?: boolean
+    name?: boolean
+    desc?: boolean
+    shortDesc?: boolean
+    time?: boolean
+    floor?: boolean
+    link?: boolean
+    top?: boolean
+    left?: boolean
+    width?: boolean
+    height?: boolean
+    radius?: boolean
+    fill?: boolean
+    strokeWidth?: boolean
+    locked?: boolean
+    type?: boolean
+    angle?: boolean
+    scaleX?: boolean
+    scaleY?: boolean
+    projectId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectItem"]>
+
+  export type ProjectItemSelectScalar = {
+    id?: boolean
+    canvasId?: boolean
+    name?: boolean
+    desc?: boolean
+    shortDesc?: boolean
+    time?: boolean
+    floor?: boolean
+    link?: boolean
+    top?: boolean
+    left?: boolean
+    width?: boolean
+    height?: boolean
+    radius?: boolean
+    fill?: boolean
+    strokeWidth?: boolean
+    locked?: boolean
+    type?: boolean
+    angle?: boolean
+    scaleX?: boolean
+    scaleY?: boolean
+    projectId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "top" | "left" | "width" | "height" | "radius" | "fill" | "strokeWidth" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
+  export type ProjectItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+  export type ProjectItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+  export type ProjectItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+
+  export type $ProjectItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProjectItem"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      canvasId: string
+      name: string
+      desc: string | null
+      shortDesc: string | null
+      time: string | null
+      floor: number | null
+      link: string | null
+      top: number
+      left: number
+      width: number | null
+      height: number | null
+      radius: number | null
+      fill: string
+      strokeWidth: number
+      locked: boolean
+      type: $Enums.ProjectItemTypeEnum
+      angle: number
+      scaleX: number
+      scaleY: number
+      projectId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["projectItem"]>
+    composites: {}
+  }
+
+  type ProjectItemGetPayload<S extends boolean | null | undefined | ProjectItemDefaultArgs> = $Result.GetResult<Prisma.$ProjectItemPayload, S>
+
+  type ProjectItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProjectItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProjectItemCountAggregateInputType | true
+    }
+
+  export interface ProjectItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProjectItem'], meta: { name: 'ProjectItem' } }
+    /**
+     * Find zero or one ProjectItem that matches the filter.
+     * @param {ProjectItemFindUniqueArgs} args - Arguments to find a ProjectItem
+     * @example
+     * // Get one ProjectItem
+     * const projectItem = await prisma.projectItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProjectItemFindUniqueArgs>(args: SelectSubset<T, ProjectItemFindUniqueArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one ProjectItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProjectItemFindUniqueOrThrowArgs} args - Arguments to find a ProjectItem
+     * @example
+     * // Get one ProjectItem
+     * const projectItem = await prisma.projectItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProjectItemFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first ProjectItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemFindFirstArgs} args - Arguments to find a ProjectItem
+     * @example
+     * // Get one ProjectItem
+     * const projectItem = await prisma.projectItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProjectItemFindFirstArgs>(args?: SelectSubset<T, ProjectItemFindFirstArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first ProjectItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemFindFirstOrThrowArgs} args - Arguments to find a ProjectItem
+     * @example
+     * // Get one ProjectItem
+     * const projectItem = await prisma.projectItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProjectItemFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more ProjectItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProjectItems
+     * const projectItems = await prisma.projectItem.findMany()
+     * 
+     * // Get first 10 ProjectItems
+     * const projectItems = await prisma.projectItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const projectItemWithIdOnly = await prisma.projectItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProjectItemFindManyArgs>(args?: SelectSubset<T, ProjectItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a ProjectItem.
+     * @param {ProjectItemCreateArgs} args - Arguments to create a ProjectItem.
+     * @example
+     * // Create one ProjectItem
+     * const ProjectItem = await prisma.projectItem.create({
+     *   data: {
+     *     // ... data to create a ProjectItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProjectItemCreateArgs>(args: SelectSubset<T, ProjectItemCreateArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many ProjectItems.
+     * @param {ProjectItemCreateManyArgs} args - Arguments to create many ProjectItems.
+     * @example
+     * // Create many ProjectItems
+     * const projectItem = await prisma.projectItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProjectItemCreateManyArgs>(args?: SelectSubset<T, ProjectItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProjectItems and returns the data saved in the database.
+     * @param {ProjectItemCreateManyAndReturnArgs} args - Arguments to create many ProjectItems.
+     * @example
+     * // Create many ProjectItems
+     * const projectItem = await prisma.projectItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProjectItems and only return the `id`
+     * const projectItemWithIdOnly = await prisma.projectItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProjectItemCreateManyAndReturnArgs>(args?: SelectSubset<T, ProjectItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a ProjectItem.
+     * @param {ProjectItemDeleteArgs} args - Arguments to delete one ProjectItem.
+     * @example
+     * // Delete one ProjectItem
+     * const ProjectItem = await prisma.projectItem.delete({
+     *   where: {
+     *     // ... filter to delete one ProjectItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProjectItemDeleteArgs>(args: SelectSubset<T, ProjectItemDeleteArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one ProjectItem.
+     * @param {ProjectItemUpdateArgs} args - Arguments to update one ProjectItem.
+     * @example
+     * // Update one ProjectItem
+     * const projectItem = await prisma.projectItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProjectItemUpdateArgs>(args: SelectSubset<T, ProjectItemUpdateArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more ProjectItems.
+     * @param {ProjectItemDeleteManyArgs} args - Arguments to filter ProjectItems to delete.
+     * @example
+     * // Delete a few ProjectItems
+     * const { count } = await prisma.projectItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProjectItemDeleteManyArgs>(args?: SelectSubset<T, ProjectItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProjectItems
+     * const projectItem = await prisma.projectItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProjectItemUpdateManyArgs>(args: SelectSubset<T, ProjectItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectItems and returns the data updated in the database.
+     * @param {ProjectItemUpdateManyAndReturnArgs} args - Arguments to update many ProjectItems.
+     * @example
+     * // Update many ProjectItems
+     * const projectItem = await prisma.projectItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProjectItems and only return the `id`
+     * const projectItemWithIdOnly = await prisma.projectItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProjectItemUpdateManyAndReturnArgs>(args: SelectSubset<T, ProjectItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one ProjectItem.
+     * @param {ProjectItemUpsertArgs} args - Arguments to update or create a ProjectItem.
+     * @example
+     * // Update or create a ProjectItem
+     * const projectItem = await prisma.projectItem.upsert({
+     *   create: {
+     *     // ... data to create a ProjectItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProjectItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProjectItemUpsertArgs>(args: SelectSubset<T, ProjectItemUpsertArgs<ExtArgs>>): Prisma__ProjectItemClient<$Result.GetResult<Prisma.$ProjectItemPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of ProjectItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemCountArgs} args - Arguments to filter ProjectItems to count.
+     * @example
+     * // Count the number of ProjectItems
+     * const count = await prisma.projectItem.count({
+     *   where: {
+     *     // ... the filter for the ProjectItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProjectItemCountArgs>(
+      args?: Subset<T, ProjectItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProjectItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProjectItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProjectItemAggregateArgs>(args: Subset<T, ProjectItemAggregateArgs>): Prisma.PrismaPromise<GetProjectItemAggregateType<T>>
+
+    /**
+     * Group by ProjectItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProjectItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProjectItemGroupByArgs['orderBy'] }
+        : { orderBy?: ProjectItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProjectItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProjectItem model
+   */
+  readonly fields: ProjectItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProjectItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProjectItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProjectItem model
+   */ 
+  interface ProjectItemFieldRefs {
+    readonly id: FieldRef<"ProjectItem", 'String'>
+    readonly canvasId: FieldRef<"ProjectItem", 'String'>
+    readonly name: FieldRef<"ProjectItem", 'String'>
+    readonly desc: FieldRef<"ProjectItem", 'String'>
+    readonly shortDesc: FieldRef<"ProjectItem", 'String'>
+    readonly time: FieldRef<"ProjectItem", 'String'>
+    readonly floor: FieldRef<"ProjectItem", 'Int'>
+    readonly link: FieldRef<"ProjectItem", 'String'>
+    readonly top: FieldRef<"ProjectItem", 'Float'>
+    readonly left: FieldRef<"ProjectItem", 'Float'>
+    readonly width: FieldRef<"ProjectItem", 'Float'>
+    readonly height: FieldRef<"ProjectItem", 'Float'>
+    readonly radius: FieldRef<"ProjectItem", 'Float'>
+    readonly fill: FieldRef<"ProjectItem", 'String'>
+    readonly strokeWidth: FieldRef<"ProjectItem", 'Float'>
+    readonly locked: FieldRef<"ProjectItem", 'Boolean'>
+    readonly type: FieldRef<"ProjectItem", 'ProjectItemTypeEnum'>
+    readonly angle: FieldRef<"ProjectItem", 'Float'>
+    readonly scaleX: FieldRef<"ProjectItem", 'Float'>
+    readonly scaleY: FieldRef<"ProjectItem", 'Float'>
+    readonly projectId: FieldRef<"ProjectItem", 'String'>
+    readonly createdAt: FieldRef<"ProjectItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProjectItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProjectItem findUnique
+   */
+  export type ProjectItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectItem to fetch.
+     */
+    where: ProjectItemWhereUniqueInput
+  }
+
+  /**
+   * ProjectItem findUniqueOrThrow
+   */
+  export type ProjectItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectItem to fetch.
+     */
+    where: ProjectItemWhereUniqueInput
+  }
+
+  /**
+   * ProjectItem findFirst
+   */
+  export type ProjectItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectItem to fetch.
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectItems to fetch.
+     */
+    orderBy?: ProjectItemOrderByWithRelationInput | ProjectItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectItems.
+     */
+    cursor?: ProjectItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectItems.
+     */
+    distinct?: ProjectItemScalarFieldEnum | ProjectItemScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectItem findFirstOrThrow
+   */
+  export type ProjectItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectItem to fetch.
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectItems to fetch.
+     */
+    orderBy?: ProjectItemOrderByWithRelationInput | ProjectItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectItems.
+     */
+    cursor?: ProjectItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectItems.
+     */
+    distinct?: ProjectItemScalarFieldEnum | ProjectItemScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectItem findMany
+   */
+  export type ProjectItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectItems to fetch.
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectItems to fetch.
+     */
+    orderBy?: ProjectItemOrderByWithRelationInput | ProjectItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProjectItems.
+     */
+    cursor?: ProjectItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectItems.
+     */
+    skip?: number
+    distinct?: ProjectItemScalarFieldEnum | ProjectItemScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectItem create
+   */
+  export type ProjectItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProjectItem.
+     */
+    data: XOR<ProjectItemCreateInput, ProjectItemUncheckedCreateInput>
+  }
+
+  /**
+   * ProjectItem createMany
+   */
+  export type ProjectItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProjectItems.
+     */
+    data: ProjectItemCreateManyInput | ProjectItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProjectItem createManyAndReturn
+   */
+  export type ProjectItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProjectItems.
+     */
+    data: ProjectItemCreateManyInput | ProjectItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProjectItem update
+   */
+  export type ProjectItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProjectItem.
+     */
+    data: XOR<ProjectItemUpdateInput, ProjectItemUncheckedUpdateInput>
+    /**
+     * Choose, which ProjectItem to update.
+     */
+    where: ProjectItemWhereUniqueInput
+  }
+
+  /**
+   * ProjectItem updateMany
+   */
+  export type ProjectItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProjectItems.
+     */
+    data: XOR<ProjectItemUpdateManyMutationInput, ProjectItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectItems to update
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * Limit how many ProjectItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectItem updateManyAndReturn
+   */
+  export type ProjectItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * The data used to update ProjectItems.
+     */
+    data: XOR<ProjectItemUpdateManyMutationInput, ProjectItemUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectItems to update
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * Limit how many ProjectItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProjectItem upsert
+   */
+  export type ProjectItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProjectItem to update in case it exists.
+     */
+    where: ProjectItemWhereUniqueInput
+    /**
+     * In case the ProjectItem found by the `where` argument doesn't exist, create a new ProjectItem with this data.
+     */
+    create: XOR<ProjectItemCreateInput, ProjectItemUncheckedCreateInput>
+    /**
+     * In case the ProjectItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProjectItemUpdateInput, ProjectItemUncheckedUpdateInput>
+  }
+
+  /**
+   * ProjectItem delete
+   */
+  export type ProjectItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
+    /**
+     * Filter which ProjectItem to delete.
+     */
+    where: ProjectItemWhereUniqueInput
+  }
+
+  /**
+   * ProjectItem deleteMany
+   */
+  export type ProjectItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectItems to delete
+     */
+    where?: ProjectItemWhereInput
+    /**
+     * Limit how many ProjectItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectItem without action
+   */
+  export type ProjectItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectItem
+     */
+    select?: ProjectItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectItem
+     */
+    omit?: ProjectItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectItemInclude<ExtArgs> | null
   }
 
 
@@ -4382,12 +5977,43 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     imageUrl: 'imageUrl',
+    canvasWidth: 'canvasWidth',
+    canvasHeight: 'canvasHeight',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+  export const ProjectItemScalarFieldEnum: {
+    id: 'id',
+    canvasId: 'canvasId',
+    name: 'name',
+    desc: 'desc',
+    shortDesc: 'shortDesc',
+    time: 'time',
+    floor: 'floor',
+    link: 'link',
+    top: 'top',
+    left: 'left',
+    width: 'width',
+    height: 'height',
+    radius: 'radius',
+    fill: 'fill',
+    strokeWidth: 'strokeWidth',
+    locked: 'locked',
+    type: 'type',
+    angle: 'angle',
+    scaleX: 'scaleX',
+    scaleY: 'scaleY',
+    projectId: 'projectId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProjectItemScalarFieldEnum = (typeof ProjectItemScalarFieldEnum)[keyof typeof ProjectItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4455,6 +6081,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -4465,6 +6105,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProjectItemTypeEnum'
+   */
+  export type EnumProjectItemTypeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectItemTypeEnum'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProjectItemTypeEnum[]'
+   */
+  export type ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectItemTypeEnum[]'>
     
   /**
    * Deep Input Types
@@ -4601,20 +6255,26 @@ export namespace Prisma {
     id?: StringFilter<"Project"> | string
     name?: StringFilter<"Project"> | string
     imageUrl?: StringNullableFilter<"Project"> | string | null
+    canvasWidth?: FloatFilter<"Project"> | number
+    canvasHeight?: FloatFilter<"Project"> | number
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    items?: ProjectItemListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    items?: ProjectItemOrderByRelationAggregateInput
   }
 
   export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -4624,22 +6284,29 @@ export namespace Prisma {
     NOT?: ProjectWhereInput | ProjectWhereInput[]
     name?: StringFilter<"Project"> | string
     imageUrl?: StringNullableFilter<"Project"> | string | null
+    canvasWidth?: FloatFilter<"Project"> | number
+    canvasHeight?: FloatFilter<"Project"> | number
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    items?: ProjectItemListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProjectCountOrderByAggregateInput
+    _avg?: ProjectAvgOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
     _min?: ProjectMinOrderByAggregateInput
+    _sum?: ProjectSumOrderByAggregateInput
   }
 
   export type ProjectScalarWhereWithAggregatesInput = {
@@ -4649,9 +6316,158 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Project"> | string
     name?: StringWithAggregatesFilter<"Project"> | string
     imageUrl?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    canvasWidth?: FloatWithAggregatesFilter<"Project"> | number
+    canvasHeight?: FloatWithAggregatesFilter<"Project"> | number
     userId?: StringWithAggregatesFilter<"Project"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+  }
+
+  export type ProjectItemWhereInput = {
+    AND?: ProjectItemWhereInput | ProjectItemWhereInput[]
+    OR?: ProjectItemWhereInput[]
+    NOT?: ProjectItemWhereInput | ProjectItemWhereInput[]
+    id?: StringFilter<"ProjectItem"> | string
+    canvasId?: StringFilter<"ProjectItem"> | string
+    name?: StringFilter<"ProjectItem"> | string
+    desc?: StringNullableFilter<"ProjectItem"> | string | null
+    shortDesc?: StringNullableFilter<"ProjectItem"> | string | null
+    time?: StringNullableFilter<"ProjectItem"> | string | null
+    floor?: IntNullableFilter<"ProjectItem"> | number | null
+    link?: StringNullableFilter<"ProjectItem"> | string | null
+    top?: FloatFilter<"ProjectItem"> | number
+    left?: FloatFilter<"ProjectItem"> | number
+    width?: FloatNullableFilter<"ProjectItem"> | number | null
+    height?: FloatNullableFilter<"ProjectItem"> | number | null
+    radius?: FloatNullableFilter<"ProjectItem"> | number | null
+    fill?: StringFilter<"ProjectItem"> | string
+    strokeWidth?: FloatFilter<"ProjectItem"> | number
+    locked?: BoolFilter<"ProjectItem"> | boolean
+    type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
+    angle?: FloatFilter<"ProjectItem"> | number
+    scaleX?: FloatFilter<"ProjectItem"> | number
+    scaleY?: FloatFilter<"ProjectItem"> | number
+    projectId?: StringFilter<"ProjectItem"> | string
+    createdAt?: DateTimeFilter<"ProjectItem"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectItem"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }
+
+  export type ProjectItemOrderByWithRelationInput = {
+    id?: SortOrder
+    canvasId?: SortOrder
+    name?: SortOrder
+    desc?: SortOrderInput | SortOrder
+    shortDesc?: SortOrderInput | SortOrder
+    time?: SortOrderInput | SortOrder
+    floor?: SortOrderInput | SortOrder
+    link?: SortOrderInput | SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
+    radius?: SortOrderInput | SortOrder
+    fill?: SortOrder
+    strokeWidth?: SortOrder
+    locked?: SortOrder
+    type?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+    projectId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+  }
+
+  export type ProjectItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProjectItemWhereInput | ProjectItemWhereInput[]
+    OR?: ProjectItemWhereInput[]
+    NOT?: ProjectItemWhereInput | ProjectItemWhereInput[]
+    canvasId?: StringFilter<"ProjectItem"> | string
+    name?: StringFilter<"ProjectItem"> | string
+    desc?: StringNullableFilter<"ProjectItem"> | string | null
+    shortDesc?: StringNullableFilter<"ProjectItem"> | string | null
+    time?: StringNullableFilter<"ProjectItem"> | string | null
+    floor?: IntNullableFilter<"ProjectItem"> | number | null
+    link?: StringNullableFilter<"ProjectItem"> | string | null
+    top?: FloatFilter<"ProjectItem"> | number
+    left?: FloatFilter<"ProjectItem"> | number
+    width?: FloatNullableFilter<"ProjectItem"> | number | null
+    height?: FloatNullableFilter<"ProjectItem"> | number | null
+    radius?: FloatNullableFilter<"ProjectItem"> | number | null
+    fill?: StringFilter<"ProjectItem"> | string
+    strokeWidth?: FloatFilter<"ProjectItem"> | number
+    locked?: BoolFilter<"ProjectItem"> | boolean
+    type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
+    angle?: FloatFilter<"ProjectItem"> | number
+    scaleX?: FloatFilter<"ProjectItem"> | number
+    scaleY?: FloatFilter<"ProjectItem"> | number
+    projectId?: StringFilter<"ProjectItem"> | string
+    createdAt?: DateTimeFilter<"ProjectItem"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectItem"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }, "id">
+
+  export type ProjectItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    canvasId?: SortOrder
+    name?: SortOrder
+    desc?: SortOrderInput | SortOrder
+    shortDesc?: SortOrderInput | SortOrder
+    time?: SortOrderInput | SortOrder
+    floor?: SortOrderInput | SortOrder
+    link?: SortOrderInput | SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrderInput | SortOrder
+    height?: SortOrderInput | SortOrder
+    radius?: SortOrderInput | SortOrder
+    fill?: SortOrder
+    strokeWidth?: SortOrder
+    locked?: SortOrder
+    type?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+    projectId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProjectItemCountOrderByAggregateInput
+    _avg?: ProjectItemAvgOrderByAggregateInput
+    _max?: ProjectItemMaxOrderByAggregateInput
+    _min?: ProjectItemMinOrderByAggregateInput
+    _sum?: ProjectItemSumOrderByAggregateInput
+  }
+
+  export type ProjectItemScalarWhereWithAggregatesInput = {
+    AND?: ProjectItemScalarWhereWithAggregatesInput | ProjectItemScalarWhereWithAggregatesInput[]
+    OR?: ProjectItemScalarWhereWithAggregatesInput[]
+    NOT?: ProjectItemScalarWhereWithAggregatesInput | ProjectItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProjectItem"> | string
+    canvasId?: StringWithAggregatesFilter<"ProjectItem"> | string
+    name?: StringWithAggregatesFilter<"ProjectItem"> | string
+    desc?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
+    shortDesc?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
+    time?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
+    floor?: IntNullableWithAggregatesFilter<"ProjectItem"> | number | null
+    link?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
+    top?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    left?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    width?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
+    height?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
+    radius?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
+    fill?: StringWithAggregatesFilter<"ProjectItem"> | string
+    strokeWidth?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    locked?: BoolWithAggregatesFilter<"ProjectItem"> | boolean
+    type?: EnumProjectItemTypeEnumWithAggregatesFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
+    angle?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    scaleX?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    scaleY?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    projectId?: StringWithAggregatesFilter<"ProjectItem"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProjectItem"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -4791,42 +6607,56 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectInput
+    items?: ProjectItemCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    items?: ProjectItemUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectNestedInput
+    items?: ProjectItemUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ProjectItemUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4836,6 +6666,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4844,7 +6676,190 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemCreateInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutItemsInput
+  }
+
+  export type ProjectItemUncheckedCreateInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    projectId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ProjectItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    projectId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemCreateManyInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    projectId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    projectId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5014,24 +7029,54 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type ProjectItemListRelationFilter = {
+    every?: ProjectItemWhereInput
+    some?: ProjectItemWhereInput
+    none?: ProjectItemWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ProjectItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProjectCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     imageUrl?: SortOrder
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type ProjectAvgOrderByAggregateInput = {
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
   }
 
   export type ProjectMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     imageUrl?: SortOrder
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5041,9 +7086,16 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     imageUrl?: SortOrder
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type ProjectSumOrderByAggregateInput = {
+    canvasWidth?: SortOrder
+    canvasHeight?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5062,6 +7114,202 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type EnumProjectItemTypeEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProjectItemTypeEnum | EnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel> | $Enums.ProjectItemTypeEnum
+  }
+
+  export type ProjectScalarRelationFilter = {
+    is?: ProjectWhereInput
+    isNot?: ProjectWhereInput
+  }
+
+  export type ProjectItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    canvasId?: SortOrder
+    name?: SortOrder
+    desc?: SortOrder
+    shortDesc?: SortOrder
+    time?: SortOrder
+    floor?: SortOrder
+    link?: SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrder
+    height?: SortOrder
+    radius?: SortOrder
+    fill?: SortOrder
+    strokeWidth?: SortOrder
+    locked?: SortOrder
+    type?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+    projectId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectItemAvgOrderByAggregateInput = {
+    floor?: SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrder
+    height?: SortOrder
+    radius?: SortOrder
+    strokeWidth?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+  }
+
+  export type ProjectItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    canvasId?: SortOrder
+    name?: SortOrder
+    desc?: SortOrder
+    shortDesc?: SortOrder
+    time?: SortOrder
+    floor?: SortOrder
+    link?: SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrder
+    height?: SortOrder
+    radius?: SortOrder
+    fill?: SortOrder
+    strokeWidth?: SortOrder
+    locked?: SortOrder
+    type?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+    projectId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    canvasId?: SortOrder
+    name?: SortOrder
+    desc?: SortOrder
+    shortDesc?: SortOrder
+    time?: SortOrder
+    floor?: SortOrder
+    link?: SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrder
+    height?: SortOrder
+    radius?: SortOrder
+    fill?: SortOrder
+    strokeWidth?: SortOrder
+    locked?: SortOrder
+    type?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+    projectId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectItemSumOrderByAggregateInput = {
+    floor?: SortOrder
+    top?: SortOrder
+    left?: SortOrder
+    width?: SortOrder
+    height?: SortOrder
+    radius?: SortOrder
+    strokeWidth?: SortOrder
+    angle?: SortOrder
+    scaleX?: SortOrder
+    scaleY?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type EnumProjectItemTypeEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProjectItemTypeEnum | EnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumProjectItemTypeEnumWithAggregatesFilter<$PrismaModel> | $Enums.ProjectItemTypeEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel>
+    _max?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel>
   }
 
   export type VerificationCodeCreateNestedManyWithoutUserInput = {
@@ -5180,8 +7428,30 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type ProjectItemCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput> | ProjectItemCreateWithoutProjectInput[] | ProjectItemUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectItemCreateOrConnectWithoutProjectInput | ProjectItemCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectItemCreateManyProjectInputEnvelope
+    connect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+  }
+
+  export type ProjectItemUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput> | ProjectItemCreateWithoutProjectInput[] | ProjectItemUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectItemCreateOrConnectWithoutProjectInput | ProjectItemCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectItemCreateManyProjectInputEnvelope
+    connect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutProjectNestedInput = {
@@ -5190,6 +7460,68 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutProjectInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectInput, UserUpdateWithoutProjectInput>, UserUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type ProjectItemUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput> | ProjectItemCreateWithoutProjectInput[] | ProjectItemUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectItemCreateOrConnectWithoutProjectInput | ProjectItemCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectItemUpsertWithWhereUniqueWithoutProjectInput | ProjectItemUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectItemCreateManyProjectInputEnvelope
+    set?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    disconnect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    delete?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    connect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    update?: ProjectItemUpdateWithWhereUniqueWithoutProjectInput | ProjectItemUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectItemUpdateManyWithWhereWithoutProjectInput | ProjectItemUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectItemScalarWhereInput | ProjectItemScalarWhereInput[]
+  }
+
+  export type ProjectItemUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput> | ProjectItemCreateWithoutProjectInput[] | ProjectItemUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectItemCreateOrConnectWithoutProjectInput | ProjectItemCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectItemUpsertWithWhereUniqueWithoutProjectInput | ProjectItemUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectItemCreateManyProjectInputEnvelope
+    set?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    disconnect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    delete?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    connect?: ProjectItemWhereUniqueInput | ProjectItemWhereUniqueInput[]
+    update?: ProjectItemUpdateWithWhereUniqueWithoutProjectInput | ProjectItemUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectItemUpdateManyWithWhereWithoutProjectInput | ProjectItemUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectItemScalarWhereInput | ProjectItemScalarWhereInput[]
+  }
+
+  export type ProjectCreateNestedOneWithoutItemsInput = {
+    create?: XOR<ProjectCreateWithoutItemsInput, ProjectUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutItemsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EnumProjectItemTypeEnumFieldUpdateOperationsInput = {
+    set?: $Enums.ProjectItemTypeEnum
+  }
+
+  export type ProjectUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<ProjectCreateWithoutItemsInput, ProjectUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutItemsInput
+    upsert?: ProjectUpsertWithoutItemsInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutItemsInput, ProjectUpdateWithoutItemsInput>, ProjectUncheckedUpdateWithoutItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5286,6 +7618,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -5312,6 +7655,82 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumProjectItemTypeEnumFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProjectItemTypeEnum | EnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel> | $Enums.ProjectItemTypeEnum
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumProjectItemTypeEnumWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProjectItemTypeEnum | EnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    in?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProjectItemTypeEnum[] | ListEnumProjectItemTypeEnumFieldRefInput<$PrismaModel>
+    not?: NestedEnumProjectItemTypeEnumWithAggregatesFilter<$PrismaModel> | $Enums.ProjectItemTypeEnum
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel>
+    _max?: NestedEnumProjectItemTypeEnumFilter<$PrismaModel>
   }
 
   export type VerificationCodeCreateWithoutUserInput = {
@@ -5342,16 +7761,22 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    items?: ProjectItemCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    items?: ProjectItemUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutUserInput = {
@@ -5414,6 +7839,8 @@ export namespace Prisma {
     id?: StringFilter<"Project"> | string
     name?: StringFilter<"Project"> | string
     imageUrl?: StringNullableFilter<"Project"> | string | null
+    canvasWidth?: FloatFilter<"Project"> | number
+    canvasHeight?: FloatFilter<"Project"> | number
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -5506,6 +7933,66 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutProjectInput, UserUncheckedCreateWithoutProjectInput>
   }
 
+  export type ProjectItemCreateWithoutProjectInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectItemUncheckedCreateWithoutProjectInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectItemCreateOrConnectWithoutProjectInput = {
+    where: ProjectItemWhereUniqueInput
+    create: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectItemCreateManyProjectInputEnvelope = {
+    data: ProjectItemCreateManyProjectInput | ProjectItemCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProjectInput = {
     update: XOR<UserUpdateWithoutProjectInput, UserUncheckedUpdateWithoutProjectInput>
     create: XOR<UserCreateWithoutProjectInput, UserUncheckedCreateWithoutProjectInput>
@@ -5539,6 +8026,111 @@ export namespace Prisma {
     VerificationCode?: VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type ProjectItemUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ProjectItemWhereUniqueInput
+    update: XOR<ProjectItemUpdateWithoutProjectInput, ProjectItemUncheckedUpdateWithoutProjectInput>
+    create: XOR<ProjectItemCreateWithoutProjectInput, ProjectItemUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectItemUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ProjectItemWhereUniqueInput
+    data: XOR<ProjectItemUpdateWithoutProjectInput, ProjectItemUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type ProjectItemUpdateManyWithWhereWithoutProjectInput = {
+    where: ProjectItemScalarWhereInput
+    data: XOR<ProjectItemUpdateManyMutationInput, ProjectItemUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type ProjectItemScalarWhereInput = {
+    AND?: ProjectItemScalarWhereInput | ProjectItemScalarWhereInput[]
+    OR?: ProjectItemScalarWhereInput[]
+    NOT?: ProjectItemScalarWhereInput | ProjectItemScalarWhereInput[]
+    id?: StringFilter<"ProjectItem"> | string
+    canvasId?: StringFilter<"ProjectItem"> | string
+    name?: StringFilter<"ProjectItem"> | string
+    desc?: StringNullableFilter<"ProjectItem"> | string | null
+    shortDesc?: StringNullableFilter<"ProjectItem"> | string | null
+    time?: StringNullableFilter<"ProjectItem"> | string | null
+    floor?: IntNullableFilter<"ProjectItem"> | number | null
+    link?: StringNullableFilter<"ProjectItem"> | string | null
+    top?: FloatFilter<"ProjectItem"> | number
+    left?: FloatFilter<"ProjectItem"> | number
+    width?: FloatNullableFilter<"ProjectItem"> | number | null
+    height?: FloatNullableFilter<"ProjectItem"> | number | null
+    radius?: FloatNullableFilter<"ProjectItem"> | number | null
+    fill?: StringFilter<"ProjectItem"> | string
+    strokeWidth?: FloatFilter<"ProjectItem"> | number
+    locked?: BoolFilter<"ProjectItem"> | boolean
+    type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
+    angle?: FloatFilter<"ProjectItem"> | number
+    scaleX?: FloatFilter<"ProjectItem"> | number
+    scaleY?: FloatFilter<"ProjectItem"> | number
+    projectId?: StringFilter<"ProjectItem"> | string
+    createdAt?: DateTimeFilter<"ProjectItem"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectItem"> | Date | string
+  }
+
+  export type ProjectCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectCreateOrConnectWithoutItemsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutItemsInput, ProjectUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ProjectUpsertWithoutItemsInput = {
+    update: XOR<ProjectUpdateWithoutItemsInput, ProjectUncheckedUpdateWithoutItemsInput>
+    create: XOR<ProjectCreateWithoutItemsInput, ProjectUncheckedCreateWithoutItemsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutItemsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutItemsInput, ProjectUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ProjectUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VerificationCodeCreateManyUserInput = {
     id?: string
     code: string
@@ -5550,6 +8142,8 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
+    canvasWidth: number
+    canvasHeight: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5579,22 +8173,130 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ProjectItemUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: ProjectItemUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    canvasWidth?: FloatFieldUpdateOperationsInput | number
+    canvasHeight?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemCreateManyProjectInput = {
+    id?: string
+    canvasId: string
+    name: string
+    desc?: string | null
+    shortDesc?: string | null
+    time?: string | null
+    floor?: number | null
+    link?: string | null
+    top: number
+    left: number
+    width?: number | null
+    height?: number | null
+    radius?: number | null
+    fill: string
+    strokeWidth: number
+    locked?: boolean
+    type: $Enums.ProjectItemTypeEnum
+    angle: number
+    scaleX: number
+    scaleY: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectItemUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectItemUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvasId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    desc?: NullableStringFieldUpdateOperationsInput | string | null
+    shortDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    time?: NullableStringFieldUpdateOperationsInput | string | null
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    link?: NullableStringFieldUpdateOperationsInput | string | null
+    top?: FloatFieldUpdateOperationsInput | number
+    left?: FloatFieldUpdateOperationsInput | number
+    width?: NullableFloatFieldUpdateOperationsInput | number | null
+    height?: NullableFloatFieldUpdateOperationsInput | number | null
+    radius?: NullableFloatFieldUpdateOperationsInput | number | null
+    fill?: StringFieldUpdateOperationsInput | string
+    strokeWidth?: FloatFieldUpdateOperationsInput | number
+    locked?: BoolFieldUpdateOperationsInput | boolean
+    type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
+    angle?: FloatFieldUpdateOperationsInput | number
+    scaleX?: FloatFieldUpdateOperationsInput | number
+    scaleY?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
