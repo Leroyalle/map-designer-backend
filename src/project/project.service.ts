@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -30,8 +26,6 @@ export class ProjectService {
         user: {
           connect: { id: findUser.id },
         },
-        canvasWidth: 1000,
-        canvasHeight: 500,
       },
     });
   }
@@ -46,18 +40,30 @@ export class ProjectService {
   }
 
   async findOne(id: string, userId: string) {
-    try {
-      const findProject = await this.checkIfProjectBelongsToUser(id, userId);
+    const project = await this.prisma.project.findUnique({
+      where: { id },
+      include: { items: true },
+    });
 
+    if (!project) {
+      throw new ConflictException('Project not found');
+    }
+
+    if (project.isPublished) {
       return {
         message: 'Проект успешно найден',
-        data: findProject,
-        isOwner: true,
+        data: project,
+        isOwner: false,
       };
-    } catch (error) {
-      console.log(error);
-      throw new InternalServerErrorException('Some error');
     }
+
+    const findProject = await this.checkIfProjectBelongsToUser(id, userId);
+
+    return {
+      message: 'Проект успешно найден',
+      data: findProject,
+      isOwner: true,
+    };
   }
 
   async publish(projectId: string, data: PublishProjectDto, userId: string) {
@@ -66,7 +72,6 @@ export class ProjectService {
       userId,
     );
 
-    // Получаем текущие элементы проекта
     const currentItems = await this.prisma.projectItem.findMany({
       where: { projectId: findProject.id },
     });
@@ -79,13 +84,14 @@ export class ProjectService {
     const itemsToCreate = data.items.filter(
       (item) => !item.id || !existingIds.includes(item.id),
     );
-    console.log('BEFORE UPDATE', data);
+
     await this.prisma.$transaction([
       this.prisma.project.update({
         where: { id: findProject.id },
         data: {
           canvasWidth: data.canvasWidth,
           canvasHeight: data.canvasHeight,
+          isPublished: true,
         },
       }),
 
@@ -114,7 +120,6 @@ export class ProjectService {
       }),
     ]);
 
-    // Получаем обновленный проект
     const updatedProject = await this.prisma.project.findUnique({
       where: { id: findProject.id },
       include: { items: true },

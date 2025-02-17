@@ -35,7 +35,6 @@ export class ProjectController {
       imageUrl: file ? file.filename : undefined,
       userId,
     };
-    console.log(file, file?.originalname);
     return await this.projectService.create(createData);
   }
 
@@ -54,13 +53,11 @@ export class ProjectController {
     @Body() data: PublishProjectDto,
     @UserId() userId: string,
   ) {
-    console.log(projectId, data);
     return this.projectService.publish(projectId, data, userId);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string, @UserId() userId: string) {
-    console.log(id, userId);
     return await this.projectService.findOne(id, userId);
   }
 

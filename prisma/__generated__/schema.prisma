@@ -48,8 +48,10 @@ model Project {
   name     String
   imageUrl String?
 
-  canvasWidth  Float
-  canvasHeight Float
+  canvasWidth  Float @default(1000)
+  canvasHeight Float @default(500)
+
+  isPublished Boolean? @default(false)
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -63,13 +65,14 @@ model Project {
 model ProjectItem {
   id String @id @default(uuid())
 
-  canvasId  String
-  name      String
-  desc      String?
-  shortDesc String?
-  time      String?
-  floor     Int?
-  link      String?
+  canvasId   String
+  name       String
+  desc       String?
+  shortDesc  String?
+  time       String?
+  floor      Int?
+  link       String?
+  placeColor String
 
   top         Float
   left        Float

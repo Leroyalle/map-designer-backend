@@ -141,6 +141,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   imageUrl: 'imageUrl',
   canvasWidth: 'canvasWidth',
   canvasHeight: 'canvasHeight',
+  isPublished: 'isPublished',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -155,6 +156,7 @@ exports.Prisma.ProjectItemScalarFieldEnum = {
   time: 'time',
   floor: 'floor',
   link: 'link',
+  placeColor: 'placeColor',
   top: 'top',
   left: 'left',
   width: 'width',

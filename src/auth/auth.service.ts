@@ -33,11 +33,13 @@ export class AuthService {
     const createdCode = await this.emailService.createVerificationCode(
       createdUser.id,
     );
-
+    console.log('VERIFICATED CODE BEFORE');
     await this.emailService.sendVerificationCode(
       createdUser.email,
       createdCode.code,
     );
+
+    console.log('VERIFICATED CODE SUCCESS');
 
     return {
       message:

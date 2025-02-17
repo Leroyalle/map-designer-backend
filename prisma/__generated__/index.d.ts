@@ -3436,6 +3436,7 @@ export namespace Prisma {
     imageUrl: string | null
     canvasWidth: number | null
     canvasHeight: number | null
+    isPublished: boolean | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3447,6 +3448,7 @@ export namespace Prisma {
     imageUrl: string | null
     canvasWidth: number | null
     canvasHeight: number | null
+    isPublished: boolean | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -3458,6 +3460,7 @@ export namespace Prisma {
     imageUrl: number
     canvasWidth: number
     canvasHeight: number
+    isPublished: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -3481,6 +3484,7 @@ export namespace Prisma {
     imageUrl?: true
     canvasWidth?: true
     canvasHeight?: true
+    isPublished?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3492,6 +3496,7 @@ export namespace Prisma {
     imageUrl?: true
     canvasWidth?: true
     canvasHeight?: true
+    isPublished?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3503,6 +3508,7 @@ export namespace Prisma {
     imageUrl?: true
     canvasWidth?: true
     canvasHeight?: true
+    isPublished?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -3601,6 +3607,7 @@ export namespace Prisma {
     imageUrl: string | null
     canvasWidth: number
     canvasHeight: number
+    isPublished: boolean | null
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -3631,6 +3638,7 @@ export namespace Prisma {
     imageUrl?: boolean
     canvasWidth?: boolean
     canvasHeight?: boolean
+    isPublished?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3645,6 +3653,7 @@ export namespace Prisma {
     imageUrl?: boolean
     canvasWidth?: boolean
     canvasHeight?: boolean
+    isPublished?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3657,6 +3666,7 @@ export namespace Prisma {
     imageUrl?: boolean
     canvasWidth?: boolean
     canvasHeight?: boolean
+    isPublished?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3669,12 +3679,13 @@ export namespace Prisma {
     imageUrl?: boolean
     canvasWidth?: boolean
     canvasHeight?: boolean
+    isPublished?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "imageUrl" | "canvasWidth" | "canvasHeight" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "imageUrl" | "canvasWidth" | "canvasHeight" | "isPublished" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Project$itemsArgs<ExtArgs>
@@ -3699,6 +3710,7 @@ export namespace Prisma {
       imageUrl: string | null
       canvasWidth: number
       canvasHeight: number
+      isPublished: boolean | null
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -4132,6 +4144,7 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"Project", 'String'>
     readonly canvasWidth: FieldRef<"Project", 'Float'>
     readonly canvasHeight: FieldRef<"Project", 'Float'>
+    readonly isPublished: FieldRef<"Project", 'Boolean'>
     readonly userId: FieldRef<"Project", 'String'>
     readonly createdAt: FieldRef<"Project", 'DateTime'>
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
@@ -4620,6 +4633,7 @@ export namespace Prisma {
     time: string | null
     floor: number | null
     link: string | null
+    placeColor: string | null
     top: number | null
     left: number | null
     width: number | null
@@ -4646,6 +4660,7 @@ export namespace Prisma {
     time: string | null
     floor: number | null
     link: string | null
+    placeColor: string | null
     top: number | null
     left: number | null
     width: number | null
@@ -4672,6 +4687,7 @@ export namespace Prisma {
     time: number
     floor: number
     link: number
+    placeColor: number
     top: number
     left: number
     width: number
@@ -4726,6 +4742,7 @@ export namespace Prisma {
     time?: true
     floor?: true
     link?: true
+    placeColor?: true
     top?: true
     left?: true
     width?: true
@@ -4752,6 +4769,7 @@ export namespace Prisma {
     time?: true
     floor?: true
     link?: true
+    placeColor?: true
     top?: true
     left?: true
     width?: true
@@ -4778,6 +4796,7 @@ export namespace Prisma {
     time?: true
     floor?: true
     link?: true
+    placeColor?: true
     top?: true
     left?: true
     width?: true
@@ -4891,6 +4910,7 @@ export namespace Prisma {
     time: string | null
     floor: number | null
     link: string | null
+    placeColor: string
     top: number
     left: number
     width: number | null
@@ -4936,6 +4956,7 @@ export namespace Prisma {
     time?: boolean
     floor?: boolean
     link?: boolean
+    placeColor?: boolean
     top?: boolean
     left?: boolean
     width?: boolean
@@ -4963,6 +4984,7 @@ export namespace Prisma {
     time?: boolean
     floor?: boolean
     link?: boolean
+    placeColor?: boolean
     top?: boolean
     left?: boolean
     width?: boolean
@@ -4990,6 +5012,7 @@ export namespace Prisma {
     time?: boolean
     floor?: boolean
     link?: boolean
+    placeColor?: boolean
     top?: boolean
     left?: boolean
     width?: boolean
@@ -5017,6 +5040,7 @@ export namespace Prisma {
     time?: boolean
     floor?: boolean
     link?: boolean
+    placeColor?: boolean
     top?: boolean
     left?: boolean
     width?: boolean
@@ -5034,7 +5058,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "top" | "left" | "width" | "height" | "radius" | "fill" | "strokeWidth" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
+  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "placeColor" | "top" | "left" | "width" | "height" | "radius" | "fill" | "strokeWidth" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
   export type ProjectItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
@@ -5059,6 +5083,7 @@ export namespace Prisma {
       time: string | null
       floor: number | null
       link: string | null
+      placeColor: string
       top: number
       left: number
       width: number | null
@@ -5506,6 +5531,7 @@ export namespace Prisma {
     readonly time: FieldRef<"ProjectItem", 'String'>
     readonly floor: FieldRef<"ProjectItem", 'Int'>
     readonly link: FieldRef<"ProjectItem", 'String'>
+    readonly placeColor: FieldRef<"ProjectItem", 'String'>
     readonly top: FieldRef<"ProjectItem", 'Float'>
     readonly left: FieldRef<"ProjectItem", 'Float'>
     readonly width: FieldRef<"ProjectItem", 'Float'>
@@ -5979,6 +6005,7 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     canvasWidth: 'canvasWidth',
     canvasHeight: 'canvasHeight',
+    isPublished: 'isPublished',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -5996,6 +6023,7 @@ export namespace Prisma {
     time: 'time',
     floor: 'floor',
     link: 'link',
+    placeColor: 'placeColor',
     top: 'top',
     left: 'left',
     width: 'width',
@@ -6257,6 +6285,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Project"> | string | null
     canvasWidth?: FloatFilter<"Project"> | number
     canvasHeight?: FloatFilter<"Project"> | number
+    isPublished?: BoolNullableFilter<"Project"> | boolean | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -6270,6 +6299,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     canvasWidth?: SortOrder
     canvasHeight?: SortOrder
+    isPublished?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6286,6 +6316,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Project"> | string | null
     canvasWidth?: FloatFilter<"Project"> | number
     canvasHeight?: FloatFilter<"Project"> | number
+    isPublished?: BoolNullableFilter<"Project"> | boolean | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -6299,6 +6330,7 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     canvasWidth?: SortOrder
     canvasHeight?: SortOrder
+    isPublished?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -6318,6 +6350,7 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"Project"> | string | null
     canvasWidth?: FloatWithAggregatesFilter<"Project"> | number
     canvasHeight?: FloatWithAggregatesFilter<"Project"> | number
+    isPublished?: BoolNullableWithAggregatesFilter<"Project"> | boolean | null
     userId?: StringWithAggregatesFilter<"Project"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -6335,6 +6368,7 @@ export namespace Prisma {
     time?: StringNullableFilter<"ProjectItem"> | string | null
     floor?: IntNullableFilter<"ProjectItem"> | number | null
     link?: StringNullableFilter<"ProjectItem"> | string | null
+    placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
@@ -6362,6 +6396,7 @@ export namespace Prisma {
     time?: SortOrderInput | SortOrder
     floor?: SortOrderInput | SortOrder
     link?: SortOrderInput | SortOrder
+    placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
     width?: SortOrderInput | SortOrder
@@ -6392,6 +6427,7 @@ export namespace Prisma {
     time?: StringNullableFilter<"ProjectItem"> | string | null
     floor?: IntNullableFilter<"ProjectItem"> | number | null
     link?: StringNullableFilter<"ProjectItem"> | string | null
+    placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
@@ -6419,6 +6455,7 @@ export namespace Prisma {
     time?: SortOrderInput | SortOrder
     floor?: SortOrderInput | SortOrder
     link?: SortOrderInput | SortOrder
+    placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
     width?: SortOrderInput | SortOrder
@@ -6453,6 +6490,7 @@ export namespace Prisma {
     time?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
     floor?: IntNullableWithAggregatesFilter<"ProjectItem"> | number | null
     link?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
+    placeColor?: StringWithAggregatesFilter<"ProjectItem"> | string
     top?: FloatWithAggregatesFilter<"ProjectItem"> | number
     left?: FloatWithAggregatesFilter<"ProjectItem"> | number
     width?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
@@ -6607,8 +6645,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectInput
@@ -6619,8 +6658,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6633,6 +6673,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectNestedInput
@@ -6645,6 +6686,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6655,8 +6697,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6668,6 +6711,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6678,6 +6722,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6692,6 +6737,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -6718,6 +6764,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -6744,6 +6791,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -6770,6 +6818,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -6796,6 +6845,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -6822,6 +6872,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -6847,6 +6898,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -7040,6 +7092,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type ProjectItemListRelationFilter = {
     every?: ProjectItemWhereInput
     some?: ProjectItemWhereInput
@@ -7061,6 +7118,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     canvasWidth?: SortOrder
     canvasHeight?: SortOrder
+    isPublished?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7077,6 +7135,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     canvasWidth?: SortOrder
     canvasHeight?: SortOrder
+    isPublished?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7088,6 +7147,7 @@ export namespace Prisma {
     imageUrl?: SortOrder
     canvasWidth?: SortOrder
     canvasHeight?: SortOrder
+    isPublished?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7130,6 +7190,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -7175,6 +7243,7 @@ export namespace Prisma {
     time?: SortOrder
     floor?: SortOrder
     link?: SortOrder
+    placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
     width?: SortOrder
@@ -7214,6 +7283,7 @@ export namespace Prisma {
     time?: SortOrder
     floor?: SortOrder
     link?: SortOrder
+    placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
     width?: SortOrder
@@ -7240,6 +7310,7 @@ export namespace Prisma {
     time?: SortOrder
     floor?: SortOrder
     link?: SortOrder
+    placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
     width?: SortOrder
@@ -7454,6 +7525,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type UserUpdateOneRequiredWithoutProjectNestedInput = {
     create?: XOR<UserCreateWithoutProjectInput, UserUncheckedCreateWithoutProjectInput>
     connectOrCreate?: UserCreateOrConnectWithoutProjectInput
@@ -7629,6 +7704,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -7671,6 +7751,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -7761,8 +7849,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: ProjectItemCreateNestedManyWithoutProjectInput
@@ -7772,8 +7861,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: ProjectItemUncheckedCreateNestedManyWithoutProjectInput
@@ -7841,6 +7931,7 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Project"> | string | null
     canvasWidth?: FloatFilter<"Project"> | number
     canvasHeight?: FloatFilter<"Project"> | number
+    isPublished?: BoolNullableFilter<"Project"> | boolean | null
     userId?: StringFilter<"Project"> | string
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
@@ -7942,6 +8033,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -7967,6 +8059,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -8054,6 +8147,7 @@ export namespace Prisma {
     time?: StringNullableFilter<"ProjectItem"> | string | null
     floor?: IntNullableFilter<"ProjectItem"> | number | null
     link?: StringNullableFilter<"ProjectItem"> | string | null
+    placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
@@ -8075,8 +8169,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectInput
@@ -8086,8 +8181,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8115,6 +8211,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectNestedInput
@@ -8126,6 +8223,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8142,8 +8240,9 @@ export namespace Prisma {
     id?: string
     name: string
     imageUrl?: string | null
-    canvasWidth: number
-    canvasHeight: number
+    canvasWidth?: number
+    canvasHeight?: number
+    isPublished?: boolean | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8175,6 +8274,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: ProjectItemUpdateManyWithoutProjectNestedInput
@@ -8186,6 +8286,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: ProjectItemUncheckedUpdateManyWithoutProjectNestedInput
@@ -8197,6 +8298,7 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     canvasWidth?: FloatFieldUpdateOperationsInput | number
     canvasHeight?: FloatFieldUpdateOperationsInput | number
+    isPublished?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8210,6 +8312,7 @@ export namespace Prisma {
     time?: string | null
     floor?: number | null
     link?: string | null
+    placeColor: string
     top: number
     left: number
     width?: number | null
@@ -8235,6 +8338,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -8260,6 +8364,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -8285,6 +8390,7 @@ export namespace Prisma {
     time?: NullableStringFieldUpdateOperationsInput | string | null
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     link?: NullableStringFieldUpdateOperationsInput | string | null
+    placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
