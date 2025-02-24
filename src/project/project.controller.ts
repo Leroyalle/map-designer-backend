@@ -58,7 +58,9 @@ export class ProjectController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @UserId() userId: string) {
-    return await this.projectService.findOne(id, userId);
+    const project = await this.projectService.findOne(id, userId);
+    console.log('project', project);
+    return project;
   }
 
   @Patch(':id')

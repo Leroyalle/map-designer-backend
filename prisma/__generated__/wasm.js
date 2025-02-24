@@ -161,9 +161,11 @@ exports.Prisma.ProjectItemScalarFieldEnum = {
   left: 'left',
   width: 'width',
   height: 'height',
+  imageUrl: 'imageUrl',
   radius: 'radius',
   fill: 'fill',
   strokeWidth: 'strokeWidth',
+  stroke: 'stroke',
   locked: 'locked',
   type: 'type',
   angle: 'angle',
@@ -190,7 +192,9 @@ exports.Prisma.NullsOrder = {
 };
 exports.ProjectItemTypeEnum = exports.$Enums.ProjectItemTypeEnum = {
   rect: 'rect',
-  circle: 'circle'
+  ellipse: 'ellipse',
+  image: 'image',
+  line: 'line'
 };
 
 exports.Prisma.ModelName = {

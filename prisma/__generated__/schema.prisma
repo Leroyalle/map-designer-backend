@@ -78,9 +78,11 @@ model ProjectItem {
   left        Float
   width       Float?
   height      Float?
+  imageUrl    String?
   radius      Float?
   fill        String
   strokeWidth Float
+  stroke      String?
   locked      Boolean             @default(false)
   type        ProjectItemTypeEnum
   angle       Float
@@ -96,5 +98,7 @@ model ProjectItem {
 
 enum ProjectItemTypeEnum {
   rect
-  circle
+  ellipse
+  image
+  line
 }

@@ -40,7 +40,9 @@ export type ProjectItem = $Result.DefaultSelection<Prisma.$ProjectItemPayload>
 export namespace $Enums {
   export const ProjectItemTypeEnum: {
   rect: 'rect',
-  circle: 'circle'
+  ellipse: 'ellipse',
+  image: 'image',
+  line: 'line'
 };
 
 export type ProjectItemTypeEnum = (typeof ProjectItemTypeEnum)[keyof typeof ProjectItemTypeEnum]
@@ -4638,9 +4640,11 @@ export namespace Prisma {
     left: number | null
     width: number | null
     height: number | null
+    imageUrl: string | null
     radius: number | null
     fill: string | null
     strokeWidth: number | null
+    stroke: string | null
     locked: boolean | null
     type: $Enums.ProjectItemTypeEnum | null
     angle: number | null
@@ -4665,9 +4669,11 @@ export namespace Prisma {
     left: number | null
     width: number | null
     height: number | null
+    imageUrl: string | null
     radius: number | null
     fill: string | null
     strokeWidth: number | null
+    stroke: string | null
     locked: boolean | null
     type: $Enums.ProjectItemTypeEnum | null
     angle: number | null
@@ -4692,9 +4698,11 @@ export namespace Prisma {
     left: number
     width: number
     height: number
+    imageUrl: number
     radius: number
     fill: number
     strokeWidth: number
+    stroke: number
     locked: number
     type: number
     angle: number
@@ -4747,9 +4755,11 @@ export namespace Prisma {
     left?: true
     width?: true
     height?: true
+    imageUrl?: true
     radius?: true
     fill?: true
     strokeWidth?: true
+    stroke?: true
     locked?: true
     type?: true
     angle?: true
@@ -4774,9 +4784,11 @@ export namespace Prisma {
     left?: true
     width?: true
     height?: true
+    imageUrl?: true
     radius?: true
     fill?: true
     strokeWidth?: true
+    stroke?: true
     locked?: true
     type?: true
     angle?: true
@@ -4801,9 +4813,11 @@ export namespace Prisma {
     left?: true
     width?: true
     height?: true
+    imageUrl?: true
     radius?: true
     fill?: true
     strokeWidth?: true
+    stroke?: true
     locked?: true
     type?: true
     angle?: true
@@ -4915,9 +4929,11 @@ export namespace Prisma {
     left: number
     width: number | null
     height: number | null
+    imageUrl: string | null
     radius: number | null
     fill: string
     strokeWidth: number
+    stroke: string | null
     locked: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -4961,9 +4977,11 @@ export namespace Prisma {
     left?: boolean
     width?: boolean
     height?: boolean
+    imageUrl?: boolean
     radius?: boolean
     fill?: boolean
     strokeWidth?: boolean
+    stroke?: boolean
     locked?: boolean
     type?: boolean
     angle?: boolean
@@ -4989,9 +5007,11 @@ export namespace Prisma {
     left?: boolean
     width?: boolean
     height?: boolean
+    imageUrl?: boolean
     radius?: boolean
     fill?: boolean
     strokeWidth?: boolean
+    stroke?: boolean
     locked?: boolean
     type?: boolean
     angle?: boolean
@@ -5017,9 +5037,11 @@ export namespace Prisma {
     left?: boolean
     width?: boolean
     height?: boolean
+    imageUrl?: boolean
     radius?: boolean
     fill?: boolean
     strokeWidth?: boolean
+    stroke?: boolean
     locked?: boolean
     type?: boolean
     angle?: boolean
@@ -5045,9 +5067,11 @@ export namespace Prisma {
     left?: boolean
     width?: boolean
     height?: boolean
+    imageUrl?: boolean
     radius?: boolean
     fill?: boolean
     strokeWidth?: boolean
+    stroke?: boolean
     locked?: boolean
     type?: boolean
     angle?: boolean
@@ -5058,7 +5082,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "placeColor" | "top" | "left" | "width" | "height" | "radius" | "fill" | "strokeWidth" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
+  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "placeColor" | "top" | "left" | "width" | "height" | "imageUrl" | "radius" | "fill" | "strokeWidth" | "stroke" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
   export type ProjectItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
@@ -5088,9 +5112,11 @@ export namespace Prisma {
       left: number
       width: number | null
       height: number | null
+      imageUrl: string | null
       radius: number | null
       fill: string
       strokeWidth: number
+      stroke: string | null
       locked: boolean
       type: $Enums.ProjectItemTypeEnum
       angle: number
@@ -5536,9 +5562,11 @@ export namespace Prisma {
     readonly left: FieldRef<"ProjectItem", 'Float'>
     readonly width: FieldRef<"ProjectItem", 'Float'>
     readonly height: FieldRef<"ProjectItem", 'Float'>
+    readonly imageUrl: FieldRef<"ProjectItem", 'String'>
     readonly radius: FieldRef<"ProjectItem", 'Float'>
     readonly fill: FieldRef<"ProjectItem", 'String'>
     readonly strokeWidth: FieldRef<"ProjectItem", 'Float'>
+    readonly stroke: FieldRef<"ProjectItem", 'String'>
     readonly locked: FieldRef<"ProjectItem", 'Boolean'>
     readonly type: FieldRef<"ProjectItem", 'ProjectItemTypeEnum'>
     readonly angle: FieldRef<"ProjectItem", 'Float'>
@@ -6028,9 +6056,11 @@ export namespace Prisma {
     left: 'left',
     width: 'width',
     height: 'height',
+    imageUrl: 'imageUrl',
     radius: 'radius',
     fill: 'fill',
     strokeWidth: 'strokeWidth',
+    stroke: 'stroke',
     locked: 'locked',
     type: 'type',
     angle: 'angle',
@@ -6373,9 +6403,11 @@ export namespace Prisma {
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
+    imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
     radius?: FloatNullableFilter<"ProjectItem"> | number | null
     fill?: StringFilter<"ProjectItem"> | string
     strokeWidth?: FloatFilter<"ProjectItem"> | number
+    stroke?: StringNullableFilter<"ProjectItem"> | string | null
     locked?: BoolFilter<"ProjectItem"> | boolean
     type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
     angle?: FloatFilter<"ProjectItem"> | number
@@ -6401,9 +6433,11 @@ export namespace Prisma {
     left?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     radius?: SortOrderInput | SortOrder
     fill?: SortOrder
     strokeWidth?: SortOrder
+    stroke?: SortOrderInput | SortOrder
     locked?: SortOrder
     type?: SortOrder
     angle?: SortOrder
@@ -6432,9 +6466,11 @@ export namespace Prisma {
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
+    imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
     radius?: FloatNullableFilter<"ProjectItem"> | number | null
     fill?: StringFilter<"ProjectItem"> | string
     strokeWidth?: FloatFilter<"ProjectItem"> | number
+    stroke?: StringNullableFilter<"ProjectItem"> | string | null
     locked?: BoolFilter<"ProjectItem"> | boolean
     type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
     angle?: FloatFilter<"ProjectItem"> | number
@@ -6460,9 +6496,11 @@ export namespace Prisma {
     left?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     radius?: SortOrderInput | SortOrder
     fill?: SortOrder
     strokeWidth?: SortOrder
+    stroke?: SortOrderInput | SortOrder
     locked?: SortOrder
     type?: SortOrder
     angle?: SortOrder
@@ -6495,9 +6533,11 @@ export namespace Prisma {
     left?: FloatWithAggregatesFilter<"ProjectItem"> | number
     width?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
     height?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
+    imageUrl?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
     radius?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
     fill?: StringWithAggregatesFilter<"ProjectItem"> | string
     strokeWidth?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    stroke?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
     locked?: BoolWithAggregatesFilter<"ProjectItem"> | boolean
     type?: EnumProjectItemTypeEnumWithAggregatesFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
     angle?: FloatWithAggregatesFilter<"ProjectItem"> | number
@@ -6742,9 +6782,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -6769,9 +6811,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -6796,9 +6840,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -6823,9 +6869,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -6850,9 +6898,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -6877,9 +6927,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -6903,9 +6955,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -7248,9 +7302,11 @@ export namespace Prisma {
     left?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    imageUrl?: SortOrder
     radius?: SortOrder
     fill?: SortOrder
     strokeWidth?: SortOrder
+    stroke?: SortOrder
     locked?: SortOrder
     type?: SortOrder
     angle?: SortOrder
@@ -7288,9 +7344,11 @@ export namespace Prisma {
     left?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    imageUrl?: SortOrder
     radius?: SortOrder
     fill?: SortOrder
     strokeWidth?: SortOrder
+    stroke?: SortOrder
     locked?: SortOrder
     type?: SortOrder
     angle?: SortOrder
@@ -7315,9 +7373,11 @@ export namespace Prisma {
     left?: SortOrder
     width?: SortOrder
     height?: SortOrder
+    imageUrl?: SortOrder
     radius?: SortOrder
     fill?: SortOrder
     strokeWidth?: SortOrder
+    stroke?: SortOrder
     locked?: SortOrder
     type?: SortOrder
     angle?: SortOrder
@@ -8038,9 +8098,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -8064,9 +8126,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -8152,9 +8216,11 @@ export namespace Prisma {
     left?: FloatFilter<"ProjectItem"> | number
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
+    imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
     radius?: FloatNullableFilter<"ProjectItem"> | number | null
     fill?: StringFilter<"ProjectItem"> | string
     strokeWidth?: FloatFilter<"ProjectItem"> | number
+    stroke?: StringNullableFilter<"ProjectItem"> | string | null
     locked?: BoolFilter<"ProjectItem"> | boolean
     type?: EnumProjectItemTypeEnumFilter<"ProjectItem"> | $Enums.ProjectItemTypeEnum
     angle?: FloatFilter<"ProjectItem"> | number
@@ -8317,9 +8383,11 @@ export namespace Prisma {
     left: number
     width?: number | null
     height?: number | null
+    imageUrl?: string | null
     radius?: number | null
     fill: string
     strokeWidth: number
+    stroke?: string | null
     locked?: boolean
     type: $Enums.ProjectItemTypeEnum
     angle: number
@@ -8343,9 +8411,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -8369,9 +8439,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
@@ -8395,9 +8467,11 @@ export namespace Prisma {
     left?: FloatFieldUpdateOperationsInput | number
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     radius?: NullableFloatFieldUpdateOperationsInput | number | null
     fill?: StringFieldUpdateOperationsInput | string
     strokeWidth?: FloatFieldUpdateOperationsInput | number
+    stroke?: NullableStringFieldUpdateOperationsInput | string | null
     locked?: BoolFieldUpdateOperationsInput | boolean
     type?: EnumProjectItemTypeEnumFieldUpdateOperationsInput | $Enums.ProjectItemTypeEnum
     angle?: FloatFieldUpdateOperationsInput | number
