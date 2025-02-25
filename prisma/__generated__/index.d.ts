@@ -275,8 +275,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.3.1
-   * Query Engine version: acc0b9dd43eb689cbd20c9470515d719db10d0b0
+   * Prisma Client JS version: 6.4.1
+   * Query Engine version: a9055b89e58b4b5bfb59600785423b1db3d0e75d
    */
   export type PrismaVersion = {
     client: string
@@ -4638,6 +4638,8 @@ export namespace Prisma {
     placeColor: string | null
     top: number | null
     left: number | null
+    originX: string | null
+    originY: string | null
     width: number | null
     height: number | null
     imageUrl: string | null
@@ -4667,6 +4669,8 @@ export namespace Prisma {
     placeColor: string | null
     top: number | null
     left: number | null
+    originX: string | null
+    originY: string | null
     width: number | null
     height: number | null
     imageUrl: string | null
@@ -4696,6 +4700,8 @@ export namespace Prisma {
     placeColor: number
     top: number
     left: number
+    originX: number
+    originY: number
     width: number
     height: number
     imageUrl: number
@@ -4753,6 +4759,8 @@ export namespace Prisma {
     placeColor?: true
     top?: true
     left?: true
+    originX?: true
+    originY?: true
     width?: true
     height?: true
     imageUrl?: true
@@ -4782,6 +4790,8 @@ export namespace Prisma {
     placeColor?: true
     top?: true
     left?: true
+    originX?: true
+    originY?: true
     width?: true
     height?: true
     imageUrl?: true
@@ -4811,6 +4821,8 @@ export namespace Prisma {
     placeColor?: true
     top?: true
     left?: true
+    originX?: true
+    originY?: true
     width?: true
     height?: true
     imageUrl?: true
@@ -4927,6 +4939,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width: number | null
     height: number | null
     imageUrl: string | null
@@ -4975,6 +4989,8 @@ export namespace Prisma {
     placeColor?: boolean
     top?: boolean
     left?: boolean
+    originX?: boolean
+    originY?: boolean
     width?: boolean
     height?: boolean
     imageUrl?: boolean
@@ -5005,6 +5021,8 @@ export namespace Prisma {
     placeColor?: boolean
     top?: boolean
     left?: boolean
+    originX?: boolean
+    originY?: boolean
     width?: boolean
     height?: boolean
     imageUrl?: boolean
@@ -5035,6 +5053,8 @@ export namespace Prisma {
     placeColor?: boolean
     top?: boolean
     left?: boolean
+    originX?: boolean
+    originY?: boolean
     width?: boolean
     height?: boolean
     imageUrl?: boolean
@@ -5065,6 +5085,8 @@ export namespace Prisma {
     placeColor?: boolean
     top?: boolean
     left?: boolean
+    originX?: boolean
+    originY?: boolean
     width?: boolean
     height?: boolean
     imageUrl?: boolean
@@ -5082,7 +5104,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "placeColor" | "top" | "left" | "width" | "height" | "imageUrl" | "radius" | "fill" | "strokeWidth" | "stroke" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
+  export type ProjectItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "canvasId" | "name" | "desc" | "shortDesc" | "time" | "floor" | "link" | "placeColor" | "top" | "left" | "originX" | "originY" | "width" | "height" | "imageUrl" | "radius" | "fill" | "strokeWidth" | "stroke" | "locked" | "type" | "angle" | "scaleX" | "scaleY" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["projectItem"]>
   export type ProjectItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
   }
@@ -5110,6 +5132,8 @@ export namespace Prisma {
       placeColor: string
       top: number
       left: number
+      originX: string
+      originY: string
       width: number | null
       height: number | null
       imageUrl: string | null
@@ -5560,6 +5584,8 @@ export namespace Prisma {
     readonly placeColor: FieldRef<"ProjectItem", 'String'>
     readonly top: FieldRef<"ProjectItem", 'Float'>
     readonly left: FieldRef<"ProjectItem", 'Float'>
+    readonly originX: FieldRef<"ProjectItem", 'String'>
+    readonly originY: FieldRef<"ProjectItem", 'String'>
     readonly width: FieldRef<"ProjectItem", 'Float'>
     readonly height: FieldRef<"ProjectItem", 'Float'>
     readonly imageUrl: FieldRef<"ProjectItem", 'String'>
@@ -6054,6 +6080,8 @@ export namespace Prisma {
     placeColor: 'placeColor',
     top: 'top',
     left: 'left',
+    originX: 'originX',
+    originY: 'originY',
     width: 'width',
     height: 'height',
     imageUrl: 'imageUrl',
@@ -6401,6 +6429,8 @@ export namespace Prisma {
     placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
+    originX?: StringFilter<"ProjectItem"> | string
+    originY?: StringFilter<"ProjectItem"> | string
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
     imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
@@ -6431,6 +6461,8 @@ export namespace Prisma {
     placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
+    originX?: SortOrder
+    originY?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
@@ -6464,6 +6496,8 @@ export namespace Prisma {
     placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
+    originX?: StringFilter<"ProjectItem"> | string
+    originY?: StringFilter<"ProjectItem"> | string
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
     imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
@@ -6494,6 +6528,8 @@ export namespace Prisma {
     placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
+    originX?: SortOrder
+    originY?: SortOrder
     width?: SortOrderInput | SortOrder
     height?: SortOrderInput | SortOrder
     imageUrl?: SortOrderInput | SortOrder
@@ -6531,6 +6567,8 @@ export namespace Prisma {
     placeColor?: StringWithAggregatesFilter<"ProjectItem"> | string
     top?: FloatWithAggregatesFilter<"ProjectItem"> | number
     left?: FloatWithAggregatesFilter<"ProjectItem"> | number
+    originX?: StringWithAggregatesFilter<"ProjectItem"> | string
+    originY?: StringWithAggregatesFilter<"ProjectItem"> | string
     width?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
     height?: FloatNullableWithAggregatesFilter<"ProjectItem"> | number | null
     imageUrl?: StringNullableWithAggregatesFilter<"ProjectItem"> | string | null
@@ -6780,6 +6818,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -6809,6 +6849,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -6838,6 +6880,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6867,6 +6911,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6896,6 +6942,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -6925,6 +6973,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6953,6 +7003,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7300,6 +7352,8 @@ export namespace Prisma {
     placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
+    originX?: SortOrder
+    originY?: SortOrder
     width?: SortOrder
     height?: SortOrder
     imageUrl?: SortOrder
@@ -7342,6 +7396,8 @@ export namespace Prisma {
     placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
+    originX?: SortOrder
+    originY?: SortOrder
     width?: SortOrder
     height?: SortOrder
     imageUrl?: SortOrder
@@ -7371,6 +7427,8 @@ export namespace Prisma {
     placeColor?: SortOrder
     top?: SortOrder
     left?: SortOrder
+    originX?: SortOrder
+    originY?: SortOrder
     width?: SortOrder
     height?: SortOrder
     imageUrl?: SortOrder
@@ -8096,6 +8154,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -8124,6 +8184,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -8214,6 +8276,8 @@ export namespace Prisma {
     placeColor?: StringFilter<"ProjectItem"> | string
     top?: FloatFilter<"ProjectItem"> | number
     left?: FloatFilter<"ProjectItem"> | number
+    originX?: StringFilter<"ProjectItem"> | string
+    originY?: StringFilter<"ProjectItem"> | string
     width?: FloatNullableFilter<"ProjectItem"> | number | null
     height?: FloatNullableFilter<"ProjectItem"> | number | null
     imageUrl?: StringNullableFilter<"ProjectItem"> | string | null
@@ -8381,6 +8445,8 @@ export namespace Prisma {
     placeColor: string
     top: number
     left: number
+    originX: string
+    originY: string
     width?: number | null
     height?: number | null
     imageUrl?: string | null
@@ -8409,6 +8475,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8437,6 +8505,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8465,6 +8535,8 @@ export namespace Prisma {
     placeColor?: StringFieldUpdateOperationsInput | string
     top?: FloatFieldUpdateOperationsInput | number
     left?: FloatFieldUpdateOperationsInput | number
+    originX?: StringFieldUpdateOperationsInput | string
+    originY?: StringFieldUpdateOperationsInput | string
     width?: NullableFloatFieldUpdateOperationsInput | number | null
     height?: NullableFloatFieldUpdateOperationsInput | number | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null

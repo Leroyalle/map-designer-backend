@@ -76,6 +76,8 @@ model ProjectItem {
 
   top         Float
   left        Float
+  originX     String
+  originY     String
   width       Float?
   height      Float?
   imageUrl    String?
